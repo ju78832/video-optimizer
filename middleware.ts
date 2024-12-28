@@ -7,7 +7,10 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/home",
 ]);
-const isPublicApiRoute = createRouteMatcher(["/api/videos"]);
+const isPublicApiRoute = createRouteMatcher([
+  "/api/videos",
+  "api/text-generation",
+]);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
@@ -26,6 +29,9 @@ export default clerkMiddleware(async (auth, req) => {
 
     if (isApiRequest && !isPublicApiRoute(req)) {
       return NextResponse.redirect(new URL("/sign-in", req.url));
+    }
+    if (isApiRequest && isPublicApiRoute(req)) {
+      return NextResponse.next();
     }
   }
   return NextResponse.next();

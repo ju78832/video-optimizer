@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.4",
+    "@google/generative-ai": "^0.21.0",
     "@prisma/client": "^6.1.0",
     "axios": "^1.7.9",
     "cloudinary": "^2.5.1",
